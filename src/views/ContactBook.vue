@@ -15,35 +15,23 @@
                     <i class="fas fa-address-book"></i>
                 </h4>
 
-                <ContactList
-                    v-if="filteredContactsCount > 0"
-                    :contacts="filteredContacts"
-                    v-model:activeIndex="activeIndex"
-                />
+                <ContactList v-if="filteredContactsCount > 0" :contacts="filteredContacts"
+                    v-model:activeIndex="activeIndex" />
 
                 <p v-else>Không có liên hệ nào.</p>
 
                 <div class="button-group mt-3">
-                    <button
-                        class="btn btn-sm btn-primary"
-                        @click="refreshList"
-                    >
+                    <button class="btn btn-sm btn-primary" @click="refreshList">
                         <i class="fas fa-sync-alto"></i>
                         Làm mới
                     </button>
 
-                    <button
-                        class="btn btn-sm btn-success"
-                        @click="goToAddContact"
-                    >
+                    <button class="btn btn-sm btn-success" @click="goToAddContact">
                         <i class="fas fa-plus"></i>
                         Thêm mới
                     </button>
 
-                    <button
-                        class="btn btn-sm btn-danger"
-                        @click="removeAllContacts"
-                    >
+                    <button class="btn btn-sm btn-danger" @click="removeAllContacts">
                         <i class="fas fa-trash"></i>
                         Xóa tất cả
                     </button>
@@ -59,6 +47,14 @@
                     </h4>
 
                     <ContactCard :contact="activeContact" />
+                    <router-link :to="{
+                        name: 'contact.edit',
+                        params: { id: activeContact._id },
+                    }">
+                        <span class="mt-2 badge badge-warning">
+                            <i class="fas fa-edit"></i> Hiệu chỉnh
+                        </span>
+                    </router-link>
                 </div>
 
                 <div v-else>
